@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="375.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainScreen">
+   <children>
+      <VBox layoutX="1.0" prefHeight="414.0" prefWidth="775.0" spacing="30.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="144.0" text="Add Part" textFill="#157cff">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton mnemonicParsing="false" selected="true" text="In-House">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="partType" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" selected="true" text="Outsourced" textAlignment="CENTER" toggleGroup="$partType">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="1.0" prefHeight="200.0" prefWidth="755.0" spacing="10.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="partIdLabel" prefHeight="44.0" prefWidth="144.0" text="ID :">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="partIdTextField" editable="false" prefHeight="38.0" prefWidth="149.0" promptText="Auto Gen - Disabled" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="756.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="partNameLabel" prefHeight="35.0" prefWidth="144.0" text="Name :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="partNameTextInputField" prefHeight="37.0" prefWidth="149.0" promptText="Part Name" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="partInvLabel" prefHeight="35.0" prefWidth="144.0" text="Inventory :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="partInvTextField" prefHeight="37.0" prefWidth="149.0" promptText="Inventory" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="partPriceLabel" prefHeight="33.0" prefWidth="144.0" text="Price/Cost :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="partPriceTextField" prefHeight="37.0" prefWidth="149.0" promptText="Price/Cost" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="maxInvLabel" prefHeight="25.0" prefWidth="144.0" text="Max :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="maxInvTextField" prefHeight="40.0" prefWidth="149.0" promptText="Max" />
+                              <Label fx:id="minInvLabel" prefHeight="37.0" prefWidth="144.0" text="Min :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="minInvTextField" prefHeight="43.0" prefWidth="149.0" promptText="Min" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="partTypeLabel" prefHeight="25.0" prefWidth="144.0" text="Company Name :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="partTypeTextField" prefHeight="49.0" prefWidth="149.0" promptText="Company Name" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+               <buttons>
+                  <Button fx:id="saveBtn" mnemonicParsing="false" text="Save">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="cancelBtn" mnemonicParsing="false" text="Cancel">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </buttons>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </ButtonBar>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</AnchorPane>
