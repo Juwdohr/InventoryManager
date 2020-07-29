@@ -1,122 +1,229 @@
 package Controller;
-/**
- * Sample Skeleton for 'MainScreen.fxml' Controller Class
- */
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import Common.Alerts;
+import Common.Data;
+import Model.Inventory;
+import Model.Part;
+import Model.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class MainScreenController {
+import java.io.IOException;
+import java.text.NumberFormat;
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+public class MainScreen {
 
-    @FXML // fx:id="searchPartBtn"
-    private Button searchPartBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="partSearchTxt"
-    private TextField partSearchTxt; // Value injected by FXMLLoader
-
-    @FXML // fx:id="deletePartBtn"
-    private Button deletePartBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="modifyPartBtn"
-    private Button modifyPartBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="addPartBtn"
-    private Button addPartBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="title"
-    private Label title; // Value injected by FXMLLoader
-
-    @FXML // fx:id="searchProductBtn"
-    private Button searchProductBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="productSearchTxt"
-    private TextField productSearchTxt; // Value injected by FXMLLoader
-
-    @FXML // fx:id="deleteProductBtn"
-    private Button deleteProductBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="modifyProductBtn"
-    private Button modifyProductBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="addProductBtn"
-    private Button addProductBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="exitBtn"
-    private Button exitBtn; // Value injected by FXMLLoader
+    Stage stage;
+    Parent scene;
 
     @FXML
-    void addPart(MouseEvent event) {
-        System.out.println("Open Add Part Screen");
-    }
+    private TextField searchPartsField;
 
     @FXML
-    void addProduct(MouseEvent event) {
-        System.out.println("Open Add Product Screen");
-    }
+    private TableView<Part> partsTableView;
 
     @FXML
-    void deletePart(MouseEvent event) {
-        System.out.println("Delete Part");
-    }
+    private TableColumn<Part, Integer> partIdCol;
 
     @FXML
-    void deleteProduct(MouseEvent event) {
-        System.out.println("Delete Product");
-    }
+    private TableColumn<Part, String> partNameCol;
 
     @FXML
-    void modifyPart(MouseEvent event) {
-        System.out.println("Open Modify Part Screen");
-    }
+    private TableColumn<Part, Integer> partInvCol;
 
     @FXML
-    void modifyProduct(MouseEvent event) {
-        System.out.println("Open Modify Product Screen");
-    }
+    private TableColumn<Part, Double> partPriceCol;
 
     @FXML
-    void searchParts(MouseEvent event) {
-        System.out.println("Search Parts");
-    }
+    private Button addPartBtn;
 
     @FXML
-    void searchProducts(MouseEvent event) {
-        System.out.println("Search Products");
-    }
+    private Button modifyPartBtn;
 
     @FXML
-    void exit(MouseEvent event) {
-        Stage stage = (Stage) exitBtn.getScene().getWindow();
-        stage.close();
-    }
+    private TextField searchProductsField;
 
+    @FXML
+    private TableView<Product> productsTableView;
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+    private TableColumn<Product, Integer> productIdCol;
+
+    @FXML
+    private TableColumn<Product, String> productNameCol;
+
+    @FXML
+    private TableColumn<Product, Integer> productInvCol;
+
+    @FXML
+    private TableColumn<Product, Double> productPriceCol;
+
+    @FXML
+    private Button modifyProductBtn;
+
+    @FXML
+    private Button exitBtn;
+
+    @FXML
     void initialize() {
-        assert searchPartBtn != null : "fx:id=\"searchPartBtn\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert partSearchTxt != null : "fx:id=\"partSearchTxt\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert deletePartBtn != null : "fx:id=\"deletePartBtn\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert modifyPartBtn != null : "fx:id=\"modifyPartBtn\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert addPartBtn != null : "fx:id=\"addPartBtn\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert title != null : "fx:id=\"title\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert searchProductBtn != null : "fx:id=\"searchProductBtn\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert productSearchTxt != null : "fx:id=\"productSearchTxt\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert deleteProductBtn != null : "fx:id=\"deleteProductBtn\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert modifyProductBtn != null : "fx:id=\"modifyProductBtn\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert addProductBtn != null : "fx:id=\"addProductBtn\" was not injected: check your FXML file 'MainScreen.fxml'.";
-        assert exitBtn != null : "fx:id=\"exitBtn\" was not injected: check your FXML file 'MainScreen.fxml'.";
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+
+        // Populate Parts Table
+        partsTableView.setItems(Inventory.getAllParts());
+        partIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partPriceCol.setCellFactory(tc -> new TableCell<Part, Double>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                super.updateItem(price, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(currencyFormat.format(price));
+                }
+            }
+        });
+
+        //Populate Product Table
+        productsTableView.setItems(Inventory.getAllProducts());
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productPriceCol.setCellFactory(tc -> new TableCell<Product, Double>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                super.updateItem(price, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(currencyFormat.format(price));
+                }
+            }
+        });
+    }
+
+    @FXML
+    void exitApplication() {
+        if (Alerts.confirmation(Alerts.confirmTypes.EXIT)) {
+            stage = (Stage) exitBtn.getScene().getWindow();
+            stage.close();
+        }
+    }
+
+    @FXML
+    void deletePart() {
+        if (Alerts.confirmation(Alerts.confirmTypes.DELETE) && !Inventory.deletePart(partsTableView.getSelectionModel().getSelectedItem())) {
+            Alerts.information("Part Not Found");
+        }
+    }
+
+    @FXML
+    void deleteProduct() {
+        if (Alerts.confirmation(Alerts.confirmTypes.DELETE) && !Inventory.deleteProduct(productsTableView.getSelectionModel().getSelectedItem())) {
+            Alerts.information("Product Not Found");
+        }
+    }
+
+    @FXML
+    void searchParts() {
+        String searchCriteria = searchPartsField.getText();
+
+        if (searchCriteria == null) {
+            partsTableView.setItems(Inventory.getAllParts());
+        } else if (Data.isNumeric(searchCriteria)) {
+            ObservableList<Part> foundPart = FXCollections.observableArrayList();
+            foundPart.add(Inventory.lookupPart(Integer.parseInt(searchCriteria)));
+            partsTableView.setItems(foundPart);
+        } else {
+            partsTableView.setItems(Inventory.lookupPart(searchCriteria));
+        }
+    }
+
+    @FXML
+    void searchProducts() {
+        String searchCriteria = searchProductsField.getText();
+
+        if (searchCriteria == null) {
+            productsTableView.setItems(Inventory.getAllProducts());
+        } else if (Data.isNumeric(searchCriteria)) {
+            ObservableList<Product> foundProduct = FXCollections.observableArrayList();
+            foundProduct.add(Inventory.lookupProduct(Integer.parseInt(searchCriteria)));
+            productsTableView.setItems(foundProduct);
+        } else {
+            productsTableView.setItems(Inventory.lookupProduct(searchCriteria));
+        }
+    }
+
+    @FXML
+    void addPart() throws IOException {
+        stage = (Stage) exitBtn.getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/AddPart.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
+    @FXML
+    void modifyPart() throws IOException {
+        Part part = partsTableView.getSelectionModel().getSelectedItem();
+
+        if (part == null) {
+            Alerts.information("You must select part to modify.");
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/ModifyPart.fxml"));
+        loader.load();
+
+        ModifyPart controller = loader.getController();
+        controller.setPart(part);
+
+        stage = (Stage) modifyPartBtn.getScene().getWindow();
+        scene = loader.getRoot();
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
+    @FXML
+    void addProduct() throws IOException {
+
+        stage = (Stage) addPartBtn.getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/View/AddProduct.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+
+    }
+
+    @FXML
+    void modifyProduct() throws IOException {
+        Product product = productsTableView.getSelectionModel().getSelectedItem();
+
+        if (product == null) {
+            Alerts.information("Must select Product to Modify");
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/ModifyProduct.fxml"));
+        loader.load();
+
+        ModifyProduct controller = loader.getController();
+        controller.setProduct(product);
+
+        stage = (Stage) modifyProductBtn.getScene().getWindow();
+        scene = loader.getRoot();
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 }

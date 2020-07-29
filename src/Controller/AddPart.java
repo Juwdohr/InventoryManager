@@ -1,87 +1,125 @@
-/**
- * Sample Skeleton for 'AddPart.fxml' Controller Class
- */
-
 package Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import Common.Alerts;
+import Common.Data;
+import Model.InHousePart;
+import Model.Inventory;
+import Model.OutSourced;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import java.io.IOException;
 
-public class AddPartController {
+public class AddPart {
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
+    Stage stage;
+    Parent scene;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+    @FXML // fx:id="partsSource"
+    private ToggleGroup partsSource; // Value injected by FXMLLoader
 
-    @FXML // fx:id="title"
-    private Label title; // Value injected by FXMLLoader
+    @FXML // fx:id="partNameTxt"
+    private TextField partNameTxt; // Value injected by FXMLLoader
 
-    @FXML // fx:id="inHouseRadio"
-    private RadioButton inHouseRadio; // Value injected by FXMLLoader
+    @FXML // fx:id="partInvTxt"
+    private TextField partInvTxt; // Value injected by FXMLLoader
 
-    @FXML // fx:id="partType"
-    private ToggleGroup partType; // Value injected by FXMLLoader
+    @FXML // fx:id="partPriceTxt"
+    private TextField partPriceTxt; // Value injected by FXMLLoader
 
-    @FXML // fx:id="outsourcedRadio"
-    private RadioButton outsourcedRadio; // Value injected by FXMLLoader
+    @FXML // fx:id="partInvMaxTxt"
+    private TextField partInvMaxTxt; // Value injected by FXMLLoader
 
-    @FXML // fx:id="partNameTextField"
-    private TextField partNameTextField; // Value injected by FXMLLoader
+    @FXML // fx:id="partInvMinTxt"
+    private TextField partInvMinTxt; // Value injected by FXMLLoader
 
-    @FXML // fx:id="inventoryTextField"
-    private TextField inventoryTextField; // Value injected by FXMLLoader
+    @FXML // fx:id="partTypeLbl"
+    private Label partTypeLbl; // Value injected by FXMLLoader
 
-    @FXML // fx:id="priceTextField"
-    private TextField priceTextField; // Value injected by FXMLLoader
+    @FXML // fx:id="partSourceTxt"
+    private TextField partSourceTxt; // Value injected by FXMLLoader
 
-    @FXML // fx:id="minInvTextField"
-    private TextField minInvTextField; // Value injected by FXMLLoader
-
-    @FXML // fx:id="machineIdTextField"
-    private TextField machineIdTextField; // Value injected by FXMLLoader
-
-    @FXML // fx:id="maxInvTextField"
-    private TextField maxInvTextField; // Value injected by FXMLLoader
-
-    @FXML // fx:id="saveBtn"
-    private Button saveBtn; // Value injected by FXMLLoader
+    @FXML // fx:id="savePartBtn"
+    private Button savePartBtn; // Value injected by FXMLLoader
 
     @FXML // fx:id="cancelBtn"
     private Button cancelBtn; // Value injected by FXMLLoader
 
-    @FXML
-    void cancel(MouseEvent event) {
-
-    }
-
-    @FXML
-    void savePart(MouseEvent event) {
-
-    }
-
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert title != null : "fx:id=\"title\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert inHouseRadio != null : "fx:id=\"inHouseRadio\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert partType != null : "fx:id=\"partType\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert outsourcedRadio != null : "fx:id=\"outsourcedRadio\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert partNameTextField != null : "fx:id=\"partNameTextField\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert inventoryTextField != null : "fx:id=\"inventoryTextField\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert priceTextField != null : "fx:id=\"priceTextField\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert minInvTextField != null : "fx:id=\"minInvTextField\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert machineIdTextField != null : "fx:id=\"machineIdTextField\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert maxInvTextField != null : "fx:id=\"maxInvTextField\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert saveBtn != null : "fx:id=\"saveBtn\" was not injected: check your FXML file 'AddPart.fxml'.";
-        assert cancelBtn != null : "fx:id=\"cancelBtn\" was not injected: check your FXML file 'AddPart.fxml'.";
+        partTypeLbl.setText("Machine ID");
+        partSourceTxt.setPromptText("Machine ID");
+    }
 
+    @FXML
+    void changePartType() {
+        if(((RadioButton) partsSource.getSelectedToggle()).getText().equals("In-House")) {
+            partTypeLbl.setText("Machine ID:");
+            partSourceTxt.setPromptText("Machine ID");
+        }
+        if(((RadioButton) partsSource.getSelectedToggle()).getText().equals("Outsourced")) {
+            partTypeLbl.setText("Company Name:");
+            partSourceTxt.setPromptText("Company Name");
+        }
+    }
+
+    @FXML
+    void cancelNewPart() throws IOException {
+        if(Alerts.confirmation(Alerts.confirmTypes.CANCEL)) {
+            stage = (Stage) cancelBtn.getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+    }
+
+    @FXML
+    void savePart() throws IOException {
+        String type = ((RadioButton) partsSource.getSelectedToggle()).getText();
+        int id = Inventory.generateUniqueId();
+        String name = partNameTxt.getText();
+        if(Data.isNumeric(name)){
+            Alerts.error();
+            return;
+        }
+        try {
+            double price = Double.parseDouble(partPriceTxt.getText());
+            int min = Integer.parseInt(partInvMinTxt.getText());
+            int max = Integer.parseInt(partInvMaxTxt.getText());
+            int stock = Integer.parseInt(partInvTxt.getText());
+
+            if(min > stock || max < stock) {
+                System.out.println(min);
+                System.out.println(max);
+                System.out.println(stock);
+                Alerts.information("Issue with stock settings.");
+                return;
+            }
+            if (type.equals("In-House")) {
+                int machineId = Integer.parseInt(partSourceTxt.getText());
+
+                Inventory.addPart(new InHousePart(id, name, price, stock, min, max, machineId));
+            }
+            if (type.equals("Outsourced")) {
+                String company = partSourceTxt.getText();
+
+                if(Data.isNumeric(company)) {
+                    Alerts.error();
+                    return;
+                }
+
+                Inventory.addPart(new OutSourced(id, name, price, stock, min, max, company));
+            }
+
+            stage = (Stage) savePartBtn.getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/View/MainScreen.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        } catch (NumberFormatException err) {
+            Alerts.error();
+        }
     }
 }

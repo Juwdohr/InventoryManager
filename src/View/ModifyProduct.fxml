@@ -12,112 +12,100 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ModifyProduct">
-   <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="775.0" spacing="10.0">
-         <children>
-            <Label prefHeight="50.0" prefWidth="160.0" text="Modify Product" textFill="#157cff">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets left="10.0" />
-         </padding>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.ModifyProduct">
+   <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="775.0" spacing="10.0">
+      <padding>
+         <Insets left="10.0"/>
+      </padding>
+      <Label prefHeight="50.0" prefWidth="160.0" text="Modify Product" textFill="#157cff">
+         <font>
+            <Font name="System Bold" size="18.0"/>
+         </font>
+      </Label>
+   </HBox>
+   <VBox layoutX="11.0" layoutY="50.0" prefHeight="300.0" prefWidth="200.0" spacing="10.0">
+      <padding>
+         <Insets top="50.0"/>
+      </padding>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="90.0" text="ID:"/>
+         <TextField fx:id="productIdTxt" disable="true" prefHeight="25.0" prefWidth="150.0"
+                    promptText="Auto Gen - Disabled"/>
       </HBox>
-      <VBox layoutX="11.0" layoutY="50.0" prefHeight="300.0" prefWidth="200.0" spacing="10.0">
-         <children>
-            <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <Label fx:id="partIdLbl" prefHeight="25.0" prefWidth="90.0" text="ID:" />
-                  <TextField fx:id="partIdTxt" disable="true" prefHeight="25.0" prefWidth="150.0" promptText="Auto Gen - Disabled" />
-               </children>
-            </HBox>
-            <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <Label fx:id="partNameLbl" prefHeight="25.0" prefWidth="90.0" text="Name:" />
-                  <TextField fx:id="partNameTxt" prefHeight="25.0" prefWidth="150.0" promptText="Product Name" />
-               </children>
-            </HBox>
-            <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <Label fx:id="partInventoryLbl" prefHeight="25.0" prefWidth="90.0" text="Inventory:" />
-                  <TextField fx:id="partInvTxt" prefHeight="25.0" prefWidth="150.0" promptText="Inventory" />
-               </children>
-            </HBox>
-            <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <Label fx:id="partPriceLbl" prefHeight="25.0" prefWidth="90.0" text="Price:" />
-                  <TextField fx:id="partPriceTxt" prefHeight="25.0" prefWidth="150.0" promptText="Price" />
-               </children>
-            </HBox>
-            <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <Label fx:id="partInvMaxLbl" prefHeight="25.0" prefWidth="96.0" text="Max:" />
-                  <TextField fx:id="partInvMaxTxt" prefHeight="25.0" prefWidth="100.0" promptText="Max" />
-                  <Label fx:id="partInvMinLbl" prefHeight="25.0" prefWidth="90.0" text="Min:" />
-                  <TextField fx:id="partInvMinTxt" prefWidth="100.0" promptText="Min" />
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets top="50.0" />
-         </padding>
-      </VBox>
-      <VBox layoutX="255.0" layoutY="50.0" prefHeight="300.0" prefWidth="500.0" spacing="10.0">
-         <children>
-            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="25.0">
-               <children>
-                  <Button fx:id="searchPartsBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Search" />
-                  <TextField fx:id="searchPartTxt" />
-               </children>
-            </HBox>
-            <TableView prefHeight="114.0" prefWidth="500.0">
-               <columns>
-                  <TableColumn prefWidth="125.0" text="Part ID" />
-                  <TableColumn prefWidth="125.0" text="Part Name" />
-                  <TableColumn prefWidth="125.0" text="Inventory Level" />
-                  <TableColumn prefWidth="125.0" text="Price Per Unit" />
-               </columns>
-            </TableView>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
-               <buttons>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Add" />
-               </buttons>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets right="25.0" />
-               </padding>
-            </ButtonBar>
-            <TableView prefHeight="114.0" prefWidth="500.0">
-               <columns>
-                  <TableColumn prefWidth="125.0" text="Part ID" />
-                  <TableColumn prefWidth="125.0" text="Part Name" />
-                  <TableColumn prefWidth="125.0" text="Inventory Level" />
-                  <TableColumn prefWidth="125.0" text="Price Per Unit" />
-               </columns>
-            </TableView>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
-               <buttons>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Delete" />
-               </buttons>
-               <padding>
-                  <Insets right="25.0" />
-               </padding>
-            </ButtonBar>
-         </children>
-      </VBox>
-      <ButtonBar layoutX="1.0" layoutY="350.0" prefHeight="50.0" prefWidth="775.0">
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="90.0" text="Name:"/>
+         <TextField fx:id="productNameTxt" prefHeight="25.0" prefWidth="150.0" promptText="Product Name"/>
+      </HBox>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="90.0" text="Inventory:"/>
+         <TextField fx:id="productInvTxt" prefHeight="25.0" prefWidth="150.0" promptText="Inventory"/>
+      </HBox>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="90.0" text="Price:"/>
+         <TextField fx:id="productPriceTxt" prefHeight="25.0" prefWidth="150.0" promptText="Price"/>
+      </HBox>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="96.0" text="Max:"/>
+         <TextField fx:id="productInvMaxTxt" prefHeight="25.0" prefWidth="100.0" promptText="Max"/>
+         <Label prefHeight="25.0" prefWidth="90.0" text="Min:"/>
+         <TextField fx:id="productInvMinTxt" prefWidth="100.0" promptText="Min"/>
+      </HBox>
+   </VBox>
+   <VBox layoutX="255.0" layoutY="50.0" prefHeight="300.0" prefWidth="500.0" spacing="10.0">
+      <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="25.0">
+         <Button mnemonicParsing="false" onMouseClicked="#searchParts" prefHeight="25.0"
+                 prefWidth="60.0" text="Search"/>
+         <TextField fx:id="searchPartsTxt" prefHeight="25.0" prefWidth="223.0" promptText="Search Part"/>
+      </HBox>
+      <TableView fx:id="unassociatedPartsTable" prefHeight="114.0" prefWidth="500.0">
+         <columns>
+            <TableColumn fx:id="unassociatedPartsIdCol" prefWidth="125.0" text="Part ID"/>
+            <TableColumn fx:id="unassociatedPartsNameCol" prefWidth="125.0" text="Part Name"/>
+            <TableColumn fx:id="unassociatedPartsInvCol" prefWidth="125.0" text="Inventory Level"/>
+            <TableColumn fx:id="unassociatedPartsPriceCol" prefWidth="125.0" text="Price Per Unit"/>
+         </columns>
+      </TableView>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0">
          <buttons>
-            <Button fx:id="savePartBtn" mnemonicParsing="false" onMouseClicked="#savePart" prefHeight="25.0" prefWidth="75.0" text="Save" />
-            <Button fx:id="cancelBtn" mnemonicParsing="false" onMouseClicked="#cancelNewPart" prefHeight="25.0" prefWidth="75.0" text="Cancel" />
+            <Button mnemonicParsing="false" onMouseClicked="#addPartToProduct"
+                    prefHeight="25.0" prefWidth="75.0" text="Add"/>
          </buttons>
+         <VBox.margin>
+            <Insets/>
+         </VBox.margin>
          <padding>
-            <Insets right="45.0" />
+            <Insets right="25.0"/>
          </padding>
       </ButtonBar>
-   </children>
+      <TableView fx:id="associatedPartsTable" prefHeight="114.0" prefWidth="500.0">
+         <columns>
+            <TableColumn fx:id="associatedPartsIdCol" prefWidth="125.0" text="Part ID"/>
+            <TableColumn fx:id="associatedPartsNameCol" prefWidth="125.0" text="Part Name"/>
+            <TableColumn fx:id="associatedPartsInvCol" prefWidth="125.0" text="Inventory Level"/>
+            <TableColumn fx:id="associatedPartsPriceCol" prefWidth="125.0" text="Price Per Unit"/>
+         </columns>
+      </TableView>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+         <buttons>
+            <Button mnemonicParsing="false" onMouseClicked="#deletePartFromProduct"
+                    prefHeight="25.0" prefWidth="75.0" text="Delete"/>
+         </buttons>
+         <padding>
+            <Insets right="25.0"/>
+         </padding>
+      </ButtonBar>
+   </VBox>
+   <ButtonBar layoutX="1.0" layoutY="350.0" prefHeight="50.0" prefWidth="775.0">
+      <buttons>
+         <Button fx:id="saveProductBtn" mnemonicParsing="false" onMouseClicked="#saveProduct" prefHeight="25.0"
+                 prefWidth="75.0" text="Save"/>
+         <Button fx:id="cancelBtn" mnemonicParsing="false" onMouseClicked="#cancelModifyProduct" prefHeight="25.0"
+                 prefWidth="75.0" text="Cancel"/>
+      </buttons>
+      <padding>
+         <Insets right="45.0"/>
+      </padding>
+   </ButtonBar>
 </AnchorPane>

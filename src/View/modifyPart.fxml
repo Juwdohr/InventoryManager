@@ -1,96 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="496.0" minWidth="986.0" prefHeight="496.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label fx:id="title" layoutX="50.0" layoutY="34.0" text="Modify Part" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="34.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controller.ModifyPart">
+   <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="775.0" spacing="10.0">
+      <padding>
+         <Insets left="10.0"/>
+      </padding>
+      <Label prefHeight="50.0" prefWidth="160.0" text="Modify Parts" textFill="#157cff">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="18.0"/>
          </font>
       </Label>
-      <RadioButton fx:id="inHouseRadio" layoutX="242.0" layoutY="41.0" mnemonicParsing="false" selected="true" text="In House">
+      <RadioButton fx:id="inHouseRadioBtn" mnemonicParsing="false" onMouseClicked="#changePartType" prefHeight="50.0"
+                   prefWidth="109.0" text="In-House">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font size="14.0"/>
          </font>
          <toggleGroup>
-            <ToggleGroup fx:id="partType" />
+            <ToggleGroup fx:id="partsSource"/>
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="outsourcedRadio" layoutX="359.0" layoutY="41.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$partType">
+      <RadioButton fx:id="outsourcedRadioBtn" mnemonicParsing="false" onMouseClicked="#changePartType"
+                   prefHeight="50.0" prefWidth="109.0" text="Outsourced" toggleGroup="$partsSource">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font size="14.0"/>
          </font>
       </RadioButton>
-      <Label layoutX="134.0" layoutY="147.0" prefHeight="17.0" prefWidth="33.0" text="ID:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="134.0" layoutY="190.0" prefHeight="27.0" prefWidth="61.0" text="Name:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="134.0" layoutY="235.0" prefHeight="27.0" prefWidth="96.0" text="Inventory:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="131.0" layoutY="282.0" prefHeight="27.0" prefWidth="96.0" text="Price/Cost:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="134.0" layoutY="326.0" prefHeight="27.0" prefWidth="84.0" text="Min:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="441.0" layoutY="326.0" prefHeight="27.0" prefWidth="84.0" text="Max:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="134.0" layoutY="370.0" prefHeight="27.0" prefWidth="108.0" text="Machine ID:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <TextField disable="true" layoutX="242.0" layoutY="148.0" style="-fx-border-color: black; -fx-border-radius: 5;" text="Auto - Gen Disabled">
-         <cursor>
-            <Cursor fx:constant="NONE" />
-         </cursor>
-      </TextField>
-      <TextField fx:id="partNameTextField" layoutX="242.0" layoutY="191.0" promptText="Part Name" style="-fx-border-color: black; -fx-border-radius: 5;" />
-      <TextField fx:id="inventoryTextField" layoutX="242.0" layoutY="236.0" promptText="Inventory" style="-fx-border-color: black; -fx-border-radius: 5;" />
-      <TextField fx:id="priceTextField" layoutX="242.0" layoutY="283.0" promptText="Price/Cost" style="-fx-border-color: black; -fx-border-radius: 5;" />
-      <TextField fx:id="minInvTextField" layoutX="242.0" layoutY="326.0" promptText="Min" style="-fx-border-color: black; -fx-border-radius: 5;" />
-      <TextField fx:id="machineIdTextField" layoutX="242.0" layoutY="371.0" promptText="Machine ID" style="-fx-border-color: black; -fx-border-radius: 5;" />
-      <TextField fx:id="maxInvTextField" layoutX="549.0" layoutY="327.0" promptText="Max" style="-fx-border-color: black; -fx-border-radius: 5;" />
-      <Button fx:id="saveBtn" layoutX="681.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#savePart" prefHeight="27.0" prefWidth="108.0" text="Save" textAlignment="CENTER">
-         <padding>
-            <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
-         </padding>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="cancelBtn" layoutX="819.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="27.0" prefWidth="108.0" text="Cancel" textAlignment="CENTER">
-         <padding>
-            <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
-         </padding>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-   </children>
+   </HBox>
+   <VBox layoutX="179.0" layoutY="50.0" prefHeight="300.0" prefWidth="387.5" spacing="10.0">
+      <padding>
+         <Insets top="50.0"/>
+      </padding>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="90.0" text="ID:"/>
+         <TextField fx:id="partIdTxt" disable="true" prefHeight="25.0" prefWidth="287.0"
+                    promptText="Auto Generated - Disabled"/>
+      </HBox>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="90.0" text="Name:"/>
+         <TextField fx:id="partNameTxt" prefHeight="25.0" prefWidth="287.0" promptText="Part Name"/>
+      </HBox>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="90.0" text="Inventory:"/>
+         <TextField fx:id="partInvTxt" prefHeight="25.0" prefWidth="287.0" promptText="Inventory"/>
+      </HBox>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="90.0" text="Price/Cost:"/>
+         <TextField fx:id="partPriceTxt" prefHeight="25.0" prefWidth="287.0" promptText="Price/Cost"/>
+      </HBox>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label prefHeight="25.0" prefWidth="96.0" text="Max:"/>
+         <TextField fx:id="partInvMaxTxt" prefHeight="25.0" prefWidth="100.0" promptText="Max"/>
+         <Label prefHeight="25.0" prefWidth="90.0" text="Min:"/>
+         <TextField fx:id="partInvMinTxt" prefWidth="100.0" promptText="Min"/>
+      </HBox>
+      <HBox prefHeight="25.0" prefWidth="200.0" spacing="10.0">
+         <Label fx:id="partTypeLbl" prefHeight="25.0" prefWidth="90.0" text="Label"/>
+         <TextField fx:id="partSourceTxt" prefHeight="25.0" prefWidth="287.0"/>
+      </HBox>
+   </VBox>
+   <ButtonBar layoutX="1.0" layoutY="350.0" prefHeight="50.0" prefWidth="775.0">
+      <buttons>
+         <Button fx:id="savePartBtn" mnemonicParsing="false" onMouseClicked="#savePart" prefHeight="25.0"
+                 prefWidth="75.0" text="Save"/>
+         <Button fx:id="cancelBtn" mnemonicParsing="false" onMouseClicked="#cancelModifyPart" prefHeight="25.0"
+                 prefWidth="75.0" text="Cancel"/>
+      </buttons>
+      <padding>
+         <Insets right="10.0"/>
+      </padding>
+   </ButtonBar>
 </AnchorPane>
