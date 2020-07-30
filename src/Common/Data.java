@@ -9,6 +9,6 @@ public class Data {
         if(strNumb == null) {
             return false;
         }
-        return pattern.matcher(strNumb).matches();
+        return pattern.matcher(strNumb.replaceAll(" ", "")).matches();
     }
 }
