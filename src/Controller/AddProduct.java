@@ -124,21 +124,23 @@ public class AddProduct {
         String searchCriteria = searchPartTxt.getText();
 
         if(searchCriteria == null) {
-            associatedPartsTable.setItems(Inventory.getAllParts());
+            unassociatedPartsTable.setItems(Inventory.getAllParts());
         } else if (Data.isNumeric(searchCriteria)) {
             ObservableList<Part> foundPart = FXCollections.observableArrayList();
             foundPart.add(Inventory.lookupPart(Integer.parseInt(searchCriteria)));
-            associatedPartsTable.setItems(foundPart);
+            unassociatedPartsTable.setItems(foundPart);
         } else {
-            associatedPartsTable.setItems(Inventory.lookupPart(searchCriteria));
+            unassociatedPartsTable.setItems(Inventory.lookupPart(searchCriteria));
         }
-
     }
 
     @FXML
     void addPartToProduct() {
        Part part = unassociatedPartsTable.getSelectionModel().getSelectedItem();
-       associatedParts.add(part);
+       if(part == null)
+           Alerts.information("Must select part to add to product");
+       if(!associatedParts.contains(part))
+            associatedParts.add(part);
     }
 
     @FXML
