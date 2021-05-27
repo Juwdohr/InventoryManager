@@ -213,15 +213,15 @@ public class ModifyProduct {
             return;
         }
 
-
+        Product updatedProduct = new Product(id, productName, price, stock, stockMin, stockMax);
+        for(Part part : associatedParts) {
+            updatedProduct.addAssociatedPart(part);
+        }
 
         int index = 0;
         for(Product product: Inventory.getAllProducts()){
             if(product.getId() == id) {
-                Inventory.updateProduct(index, new Product(id, productName, price, stock, stockMin, stockMax));
-                for(Part part : associatedParts) {
-                    product.addAssociatedPart(part);
-                }
+                Inventory.updateProduct(index, updatedProduct);
                 break;
             }
             index++;
